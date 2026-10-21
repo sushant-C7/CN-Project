@@ -2,32 +2,45 @@
 CampusVault P2P - CLI Peer Node Utility (Computer Networks Project)
 Allows running autonomous peer node instances via terminal for live testing,
 demonstrations, and Computer Networks laboratory evaluations.
+
+Supports multi-machine P2P over LAN — peers auto-detect their LAN IP
+and bind to all interfaces (0.0.0.0) by default.
 """
 
 import sys
 import time
 import argparse
 import logging
-from p2p_core.peer_node import PeerNode
+from p2p_core.peer_node import PeerNode, get_lan_ip
 from p2p_core.protocol import compute_sha256
 
 logging.basicConfig(level=logging.INFO, format="[PEER-CLI %(asctime)s] %(message)s")
 
 
 def main():
+    lan_ip = get_lan_ip()
+
     parser = argparse.ArgumentParser(description="CampusVault P2P CLI Node Client/Server")
     parser.add_argument("--node", type=str, default="Node-Student-Test", help="Peer identifier name")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="Listening IP address")
+    parser.add_argument("--host", type=str, default="0.0.0.0",
+                        help="Listening IP address (0.0.0.0 = all interfaces, for multi-machine LAN)")
     parser.add_argument("--port", type=int, default=7002, help="Listening TCP port for seeding")
     parser.add_argument("--seed-file", type=str, help="Path to text or PDF note to seed")
     parser.add_argument("--fetch-hash", type=str, help="SHA-256 hash to fetch from another peer")
-    parser.add_argument("--peer-ip", type=str, default="127.0.0.1", help="Target peer IP to download from")
+    parser.add_argument("--peer-ip", type=str, default=None,
+                        help="Target peer IP to download from (default: auto-detect LAN IP)")
     parser.add_argument("--peer-port", type=int, default=7001, help="Target peer port to download from")
     args = parser.parse_args()
 
+    # Default peer-ip to LAN IP (same machine) or user-specified remote IP
+    if args.peer_ip is None:
+        args.peer_ip = lan_ip
+
     print("=" * 60)
     print(f" CampusVault P2P Terminal Peer Node: {args.node}")
-    print(f" Socket Address: {args.host}:{args.port}")
+    print(f" Bind Address: {args.host}:{args.port}")
+    print(f" LAN IP (auto-detected): {lan_ip}")
+    print(f" Other peers can reach you at: {lan_ip}:{args.port}")
     print("=" * 60)
 
     node = PeerNode(node_id=args.node, host=args.host, port=args.port)
@@ -40,10 +53,12 @@ def main():
                 data = f.read()
                 file_hash = compute_sha256(data)
                 node.add_file(file_hash, data)
-                print(f"[+] Loaded file '{args.seed_file}'")
+                print(f"\n[+] Loaded file '{args.seed_file}'")
                 print(f"    SHA-256 Hash: {file_hash}")
                 print(f"    Size: {len(data)} bytes ({len(data) // 1024} KB)")
-                print(f"[+] Now seeding on {args.host}:{node.port}!")
+                print(f"[+] Now seeding on {lan_ip}:{node.port}!")
+                print(f"\n    >> On the OTHER machine, run:")
+                print(f"    python peer_cli.py --fetch-hash \"{file_hash}\" --peer-ip {lan_ip} --peer-port {node.port}")
         except Exception as e:
             print(f"[-] Failed to load seed file: {e}")
 

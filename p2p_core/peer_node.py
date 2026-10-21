@@ -22,11 +22,26 @@ from .protocol import (
     DEFAULT_CHUNK_SIZE
 )
 
+
+def get_lan_ip() -> str:
+    """Auto-detect the machine's LAN IP address for multi-machine P2P.
+    Falls back to 127.0.0.1 if no network is available."""
+    try:
+        # Connect to a public DNS to determine which local interface is used
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.settimeout(2)
+        s.connect(("8.8.8.8", 80))
+        ip = s.getsockname()[0]
+        s.close()
+        return ip
+    except Exception:
+        return "127.0.0.1"
+
 logging.basicConfig(level=logging.INFO, format="[PEER %(asctime)s] %(levelname)s: %(message)s")
 
 
 class PeerNode:
-    def __init__(self, node_id: str, host: str = "127.0.0.1", port: int = 7001, storage_dir: str = "./storage/files"):
+    def __init__(self, node_id: str, host: str = "0.0.0.0", port: int = 7001, storage_dir: str = "./storage/files"):
         self.node_id = node_id
         self.host = host
         self.port = port

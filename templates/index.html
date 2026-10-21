@@ -3,97 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CampusVault P2P | University Peer-to-Peer Academic Notes & Integrity Exchange</title>
-  <meta name="description" content="Decentralized, university-hosted peer-to-peer note sharing network in Python with multi-attribute filtering, cryptographic verification, and strict academic integrity governance.">
+  <title>CampusVault P2P | Peer-to-Peer Academic Notes Swarm</title>
+  <meta name="description" content="Decentralized peer-to-peer file and notes sharing network in Python with cryptographic SHA-256 verification and direct LAN socket transfers.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body class="theme-dark">
-  <!-- Campus Security Banner / Network Notice -->
-  <aside class="top-announcement" id="topAnnouncement">
-    <div class="announcement-content">
-      <span class="live-dot pulse-emerald"></span>
-      <span class="announcement-badge">CAMPUS P2P PYTHON CORE v3.4</span>
-      <span class="announcement-text">
-        Decentralized Intra-Campus Cluster Active &bull; All nodes monitored under University Academic Integrity Policy &sect; 4.2.
-      </span>
-      <span class="swarm-mini-stat" id="meshStatusBadge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <strong id="liveSwarmCount">168</strong> Active Campus Nodes
-      </span>
-    </div>
-    <button class="announcement-dismiss" id="dismissAnnouncementBtn" aria-label="Dismiss banner">&times;</button>
-  </aside>
 
   <!-- Main Navigation Header -->
   <header class="app-header" id="mainHeader">
     <div class="header-container">
-      <!-- University Brand & Logo -->
+      <!-- Brand & Emblem -->
       <div class="brand-section">
         <div class="brand-emblem">
           <svg class="brand-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="44" height="44" rx="10" fill="url(#brandGrad)"/>
-            <path d="M22 9L11 15L22 21L33 15L22 9Z" stroke="#F8FAFC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M14 17.5V26C14 27.5 17.5 31 22 31C26.5 31 30 27.5 30 26V17.5" stroke="#F8FAFC" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="22" cy="22" r="3" fill="#38BDF8"/>
-            <path d="M33 15V24" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="33" cy="25" r="1.5" fill="#F59E0B"/>
-            <defs>
-              <linearGradient id="brandGrad" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#1E293B"/>
-                <stop offset="1" stop-color="#0F172A"/>
-              </linearGradient>
-            </defs>
+            <rect width="44" height="44" rx="6" fill="#3c3836" stroke="#504945" stroke-width="1.5"/>
+            <path d="M22 9L11 15L22 21L33 15L22 9Z" stroke="#ebdbb2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 17.5V26C14 27.5 17.5 31 22 31C26.5 31 30 27.5 30 26V17.5" stroke="#ebdbb2" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="22" cy="22" r="3" fill="#83a598"/>
+            <path d="M33 15V24" stroke="#fabd2f" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="33" cy="25" r="1.5" fill="#fabd2f"/>
           </svg>
-          <div class="brand-pulse"></div>
         </div>
         <div class="brand-meta">
           <div class="brand-title-wrap">
             <h1 class="brand-title">Campus<span class="text-accent">Vault</span></h1>
-            <span class="brand-tag">Python P2P Core</span>
+            <span class="brand-tag">P2P Swarm</span>
           </div>
-          <p class="brand-sub">Computer Networks Academic Notes &amp; Integrity Mesh</p>
+          <p class="brand-sub">Computer Networks Peer-to-Peer Academic Notes Mesh</p>
         </div>
       </div>
 
-      <!-- Navigation Tabs / View Switcher -->
-      <nav class="nav-controls" aria-label="Primary Navigation">
-        <button class="nav-tab active" id="tabStudentHub" data-view="student">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          <span>Student Notes Hub</span>
-        </button>
-        <button class="nav-tab" id="tabAdminPortal" data-view="admin">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Integrity &amp; Admin Console</span>
-          <span class="admin-flag-badge" id="adminPendingBadge">2</span>
-        </button>
-      </nav>
-
-      <!-- Action & Profile Strip -->
+      <!-- Header Actions: Local Node Indicator, Upload Button, Theme Toggle -->
       <div class="header-actions">
-        <!-- Quick Upload Button -->
-        <button class="btn btn-primary" id="btnOpenUploadModal">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span>Share / Seed Note</span>
-        </button>
-
-        <!-- Role Simulator Switcher -->
-        <div class="role-selector-wrap">
-          <label for="personaSelect" class="sr-only">Switch Active Persona</label>
-          <div class="persona-select-container">
-            <span class="persona-avatar" id="currentPersonaAvatar">🎓</span>
-            <select id="personaSelect" class="persona-dropdown" title="Change active user role for testing">
-              <option value="student_alex">Alex Chen (Student • 99% Trust)</option>
-              <option value="admin_vance">Dr. Marcus Vance (Faculty Admin)</option>
-              <option value="student_rogue">Node #9948 (Flagged Account)</option>
-            </select>
-          </div>
+        <!-- Local Peer Identity Pill -->
+        <div class="persona-select-container" id="nodeIdentityContainer" title="Local Peer Node details">
+          <span class="live-dot pulse-emerald"></span>
+          <span class="mono text-sm" id="localNodeLabel">Hub-01 @ LAN</span>
         </div>
 
+        <!-- Share / Seed Note Button -->
+        <button class="btn btn-primary" id="btnOpenUploadModal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span>Share / Seed File</span>
+        </button>
+
         <!-- Theme Toggle -->
-        <button class="icon-btn" id="themeToggleBtn" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+        <button class="icon-btn" id="themeToggleBtn" title="Toggle Dark/Light Gruvbox Theme" aria-label="Toggle Theme">
           <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         </button>
@@ -104,361 +62,163 @@
   <!-- Main View Container -->
   <main class="app-main" id="mainContent">
 
-    <!-- ============================================== -->
-    <!-- VIEW 1: STUDENT NOTES HUB                     -->
-    <!-- ============================================== -->
-    <section class="view-panel active" id="viewStudentHub">
-      <!-- Hero Campus Mesh Bar -->
-      <div class="campus-hero-banner">
-        <div class="hero-left">
-          <div class="institution-pill">
-            <span class="live-dot pulse-amber"></span>
-            <span>COMPUTER NETWORKS DECENTRALIZED CAMPUS CLUSTER (PORT 8900 &bull; 7001)</span>
-          </div>
-          <h2 class="hero-heading">Peer-to-Peer Academic Knowledge Exchange</h2>
-          <p class="hero-subtext">
-            High-speed intra-campus P2P socket distribution of lecture summaries, study guides, and lab annotations.
-            Every document is cryptographically verified with SHA-256 integrity framing and vetted for strict university academic honesty standards.
-          </p>
-          <div class="mesh-telemetry-row">
-            <div class="telemetry-item">
-              <span class="tel-label">Active Seeders</span>
-              <span class="tel-val" id="telemetrySeeders">429</span>
-            </div>
-            <div class="telemetry-divider"></div>
-            <div class="telemetry-item">
-              <span class="tel-label">Verified Course Notes</span>
-              <span class="tel-val" id="telemetryNotes">8</span>
-            </div>
-            <div class="telemetry-divider"></div>
-            <div class="telemetry-item">
-              <span class="tel-label">Python Socket Throughput</span>
-              <span class="tel-val">1.4 Gbps LAN</span>
-            </div>
-            <div class="telemetry-divider"></div>
-            <div class="telemetry-item">
-              <span class="tel-label">Integrity Audit Score</span>
-              <span class="tel-val text-emerald" id="telemetryAuditScore">99.8% Clean</span>
-            </div>
-          </div>
+    <!-- Hero Campus Mesh Bar -->
+    <div class="campus-hero-banner">
+      <div class="hero-left">
+        <div class="institution-pill">
+          <span class="live-dot pulse-amber"></span>
+          <span id="heroClusterLabel">P2P CAMPUS MESH &bull; TRACKER: 8900 &bull; PEER: 7001</span>
         </div>
-
-        <div class="hero-right">
-          <div class="p2p-radar-card">
-            <div class="radar-header">
-              <span class="radar-title">P2P Swarm Topology</span>
-              <span class="radar-pulse-tag">LAN Active</span>
-            </div>
-            <div class="radar-canvas-wrap">
-              <canvas id="p2pRadarCanvas" width="220" height="150"></canvas>
-            </div>
-            <div class="radar-footer">
-              <div class="radar-legend-item">
-                <span class="legend-dot dot-cyan"></span> Campus Nodes
-              </div>
-              <div class="radar-legend-item">
-                <span class="legend-dot dot-emerald"></span> Verified Seeders
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Search & Multi-Filter Control Console -->
-      <section class="filter-console-card" aria-label="Filters and Search Console">
-        <div class="console-primary-row">
-          <!-- Text Search Bar -->
-          <div class="search-input-wrap">
-            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="searchInput" class="search-field" placeholder="Search by topic, keyword, concept (e.g. 'Dijkstra', 'Mitosis', 'IS-LM curve')..." autocomplete="off">
-            <button class="clear-search-btn" id="clearSearchBtn" title="Clear search" aria-label="Clear search input">&times;</button>
-          </div>
-
-          <!-- Sort Select -->
-          <div class="sort-select-wrap">
-            <label for="sortBySelect" class="filter-label">Sort by:</label>
-            <select id="sortBySelect" class="filter-select">
-              <option value="seeders">🔥 Most Seeded (Fastest)</option>
-              <option value="rating">⭐ Highest Rated</option>
-              <option value="newest">🕒 Newest Added</option>
-              <option value="downloads">📥 Most Downloads</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Multi-Filter Dropdowns Grid -->
-        <div class="filters-grid">
-          <!-- Filter 1: Course -->
-          <div class="filter-col">
-            <label for="filterCourse" class="filter-col-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-              Course
-            </label>
-            <select id="filterCourse" class="filter-select custom-select">
-              <option value="">All Courses</option>
-            </select>
-          </div>
-
-          <!-- Filter 2: Professor -->
-          <div class="filter-col">
-            <label for="filterProfessor" class="filter-col-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              Professor
-            </label>
-            <select id="filterProfessor" class="filter-select custom-select">
-              <option value="">All Professors</option>
-            </select>
-          </div>
-
-          <!-- Filter 3: Semester -->
-          <div class="filter-col">
-            <label for="filterSemester" class="filter-col-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Semester
-            </label>
-            <select id="filterSemester" class="filter-select custom-select">
-              <option value="">All Semesters</option>
-            </select>
-          </div>
-
-          <!-- Filter 4: Topic / Material Type -->
-          <div class="filter-col">
-            <label for="filterTopic" class="filter-col-label">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-              Topic &amp; Category
-            </label>
-            <select id="filterTopic" class="filter-select custom-select">
-              <option value="">All Topics</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Filter Pills Bar & Quick Presets -->
-        <div class="active-filters-bar" id="activeFiltersBar">
-          <div class="filter-pill-list" id="activeFilterPills">
-            <!-- Active filter chips render here -->
-          </div>
-          <button class="btn-text-clear" id="btnResetFilters" style="display: none;">
-            <span>Clear All Filters</span>
-          </button>
-        </div>
-
-        <!-- Quick Topic Chips Row -->
-        <div class="quick-chips-row">
-          <span class="chips-label">Popular Topics:</span>
-          <div class="chips-container" id="quickTopicChips">
-            <button class="chip" data-topic="Midterm Exam Prep">Midterm Exam Prep</button>
-            <button class="chip" data-topic="Dynamic Programming">Dynamic Programming</button>
-            <button class="chip" data-topic="Lab Protocols">Lab Protocols</button>
-            <button class="chip" data-topic="Quantum Mechanics">Quantum Mechanics</button>
-            <button class="chip" data-topic="Macroeconomic Models">Macroeconomic Models</button>
-            <button class="chip" data-topic="Eigenvectors">Eigenvectors</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Search Results Header & Feed -->
-      <div class="results-header-row">
-        <div class="results-count-wrap">
-          <h3 class="results-title">Available Notes &amp; Course Materials</h3>
-          <span class="results-counter" id="resultsCount">Showing 0 materials</span>
-        </div>
-        <div class="view-switch-btns">
-          <button class="view-btn active" id="btnGridView" title="Grid Layout" aria-label="Grid view">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </button>
-          <button class="view-btn" id="btnListView" title="List Layout" aria-label="List view">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Notes Cards Container -->
-      <div class="notes-feed-container grid-layout" id="notesCardsContainer">
-        <!-- Dynamically injected cards -->
-      </div>
-
-      <!-- Empty State -->
-      <div class="empty-state-card" id="emptyStateContainer" style="display: none;">
-        <div class="empty-icon-wrap">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-        </div>
-        <h4>No Course Notes Match Your Criteria</h4>
-        <p>Try widening your search keywords or resetting professor, semester, and topic filters.</p>
-        <button class="btn btn-secondary" id="btnEmptyReset">Reset All Filters</button>
-      </div>
-    </section>
-
-    <!-- ============================================== -->
-    <!-- VIEW 2: ADMINISTRATIVE & INTEGRITY CONSOLE     -->
-    <!-- ============================================== -->
-    <section class="view-panel" id="viewAdminPortal">
-      <div class="admin-top-banner">
-        <div class="admin-badge-strip">
-          <span class="integrity-badge-shield">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            OFFICE OF ACADEMIC INTEGRITY &bull; DECENTRALIZED COMPLIANCE SUITE
-          </span>
-          <span class="admin-auth-tag">Faculty &amp; Provost Moderator Clearance</span>
-        </div>
-        <h2 class="admin-heading">Academic Integrity, Takedown &amp; Actor Management Console</h2>
-        <p class="admin-subtext">
-          Audit campus peer transfers, investigate community reports for unauthorized exam leaks, copyright violations, and malicious code payloads. Exercise administrative takedown authority to maintain rigorous institutional ethics.
+        <h2 class="hero-heading">Peer-to-Peer Academic Notes Swarm</h2>
+        <p class="hero-subtext">
+          High-speed decentralized socket distribution of notes, summaries, and study guides.
+          Every file is cryptographically verified by SHA-256 chunk hashes and shared directly peer-to-peer.
         </p>
-      </div>
-
-      <!-- Admin Stat KPI Cards -->
-      <div class="admin-kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-icon icon-amber">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div class="mesh-telemetry-row">
+          <div class="telemetry-item">
+            <span class="tel-label">Swarm Peers</span>
+            <span class="tel-val" id="telemetrySeeders">1</span>
           </div>
-          <div class="kpi-info">
-            <span class="kpi-title">Pending Reports</span>
-            <span class="kpi-value text-amber" id="adminKpiPending">2</span>
-            <span class="kpi-trend">Requires moderation review</span>
+          <div class="telemetry-divider"></div>
+          <div class="telemetry-item">
+            <span class="tel-label">Shared Files</span>
+            <span class="tel-val" id="telemetryNotes">0</span>
           </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-icon icon-rose">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          <div class="telemetry-divider"></div>
+          <div class="telemetry-item">
+            <span class="tel-label">Active Swarms</span>
+            <span class="tel-val" id="telemetrySwarms">0</span>
           </div>
-          <div class="kpi-info">
-            <span class="kpi-title">Quarantined / Removed</span>
-            <span class="kpi-value text-rose" id="adminKpiQuarantine">1</span>
-            <span class="kpi-trend">Zero swarm dissemination</span>
-          </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-icon icon-purple">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg>
-          </div>
-          <div class="kpi-info">
-            <span class="kpi-title">Banned / Blacklisted Actors</span>
-            <span class="kpi-value text-purple" id="adminKpiBanned">1</span>
-            <span class="kpi-trend">Peer mesh access severed</span>
-          </div>
-        </div>
-
-        <div class="kpi-card">
-          <div class="kpi-icon icon-emerald">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="kpi-info">
-            <span class="kpi-title">Verified Clean Syllabi</span>
-            <span class="kpi-value text-emerald" id="adminKpiVerified">7</span>
-            <span class="kpi-trend">Faculty cryptographic stamp</span>
+          <div class="telemetry-divider"></div>
+          <div class="telemetry-item">
+            <span class="tel-label">Transport</span>
+            <span class="tel-val">Direct TCP Sockets</span>
           </div>
         </div>
       </div>
 
-      <!-- Admin Tab Switcher: Moderation Queue vs Malicious Actors vs Audit Trail -->
-      <div class="admin-section-tabs">
-        <button class="admin-subtab active" id="adminSubtabQueue" data-subview="queue">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          <span>Flagged Materials Queue (<span id="adminQueueCountBadge">2</span>)</span>
+      <!-- Radar Canvas -->
+      <div class="p2p-radar-card">
+        <div class="radar-header">
+          <span class="radar-title">Swarm Mesh Topology</span>
+          <span class="radar-pulse-tag" id="radarTag">LAN Connected</span>
+        </div>
+        <div class="radar-canvas-wrap">
+          <canvas id="p2pRadarCanvas" width="220" height="140"></canvas>
+        </div>
+        <div class="radar-footer">
+          <div class="radar-legend-item">
+            <span class="legend-dot dot-cyan"></span>
+            <span>Seeders</span>
+          </div>
+          <div class="radar-legend-item">
+            <span class="legend-dot dot-emerald"></span>
+            <span>Leechers / Peers</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Console -->
+    <div class="filter-console-card">
+      <div class="console-primary-row">
+        <div class="search-input-wrap">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-field" id="globalSearchInput" placeholder="Search by note title, course, professor, topic, or keyword...">
+          <button class="clear-search-btn" id="clearSearchBtn" aria-label="Clear search">&times;</button>
+        </div>
+
+        <div class="sort-select-wrap">
+          <label for="sortBySelect" class="filter-label">Sort:</label>
+          <select id="sortBySelect" class="filter-select">
+            <option value="newest" selected>Newest First</option>
+            <option value="seeders">Most Seeders</option>
+            <option value="downloads">Most Downloaded</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Secondary Filter Row -->
+      <div class="filters-grid">
+        <div class="filter-col">
+          <label class="filter-col-label" for="filterCourse">Course</label>
+          <select class="filter-select custom-select" id="filterCourse">
+            <option value="">All Courses</option>
+          </select>
+        </div>
+
+        <div class="filter-col">
+          <label class="filter-col-label" for="filterProfessor">Professor</label>
+          <select class="filter-select custom-select" id="filterProfessor">
+            <option value="">All Instructors</option>
+          </select>
+        </div>
+
+        <div class="filter-col">
+          <label class="filter-col-label" for="filterSemester">Semester</label>
+          <select class="filter-select custom-select" id="filterSemester">
+            <option value="">All Semesters</option>
+          </select>
+        </div>
+
+        <div class="filter-col">
+          <label class="filter-col-label" for="filterTopic">Topic / Category</label>
+          <select class="filter-select custom-select" id="filterTopic">
+            <option value="">All Topics</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Active Filter Tags Bar -->
+      <div class="active-filters-bar" id="activeFiltersBar" style="display: none;">
+        <div class="filter-pill-list" id="activeFilterPills"></div>
+        <button class="btn-text-clear" id="btnClearAllFilters">Clear all filters</button>
+      </div>
+
+      <!-- Quick Category Chips -->
+      <div class="quick-chips-row">
+        <span class="chips-label">Quick Tags:</span>
+        <div class="chips-container" id="quickChipsContainer">
+          <button class="chip" data-topic="Exam Study Guides">Exam Study Guides</button>
+          <button class="chip" data-topic="Lecture Summaries">Lecture Summaries</button>
+          <button class="chip" data-topic="Lab Protocols &amp; Data">Lab Protocols</button>
+          <button class="chip" data-topic="Formula Cheatsheets">Formula Cheatsheets</button>
+          <button class="chip" data-topic="Algorithms">Algorithms</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Header -->
+    <div class="results-header-row">
+      <div class="results-title-wrap">
+        <h3 class="results-title">Swarm File Catalog</h3>
+        <span class="results-counter" id="resultsCount">Loading files...</span>
+      </div>
+      <div class="view-switch-btns">
+        <button class="view-btn active" id="btnViewGrid" title="Grid View" aria-label="Grid View">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         </button>
-        <button class="admin-subtab" id="adminSubtabActors" data-subview="actors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Campus Node &amp; Actor Governance</span>
-        </button>
-        <button class="admin-subtab" id="adminSubtabAudit" data-subview="audit">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          <span>Integrity Audit Ledger</span>
+        <button class="view-btn" id="btnViewList" title="List View" aria-label="List View">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
         </button>
       </div>
+    </div>
 
-      <!-- Subview A: Flagged Materials Queue -->
-      <div class="admin-subpanel active" id="adminQueuePanel">
-        <div class="panel-header-toolbar">
-          <div class="toolbar-title">
-            <h4>Reported Files Awaiting Adjudication</h4>
-            <p>Documents reported by students or faculty for potential Honor Code breaches, pirated material, or suspicious binary payloads.</p>
-          </div>
-          <div class="toolbar-actions">
-            <button class="btn btn-secondary btn-sm" id="btnBulkAuditPassed">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Verify All Valid Files</span>
-            </button>
-          </div>
-        </div>
+    <!-- Notes Feed Container -->
+    <div class="notes-feed-container grid-layout" id="notesCardsContainer">
+      <!-- Dynamically populated by app.js -->
+    </div>
 
-        <div class="admin-table-wrapper">
-          <table class="admin-table" id="flaggedFilesTable">
-            <thead>
-              <tr>
-                <th>Document Details</th>
-                <th>Course &amp; Faculty</th>
-                <th>Flag Category</th>
-                <th>Report Details</th>
-                <th>Status / Risk</th>
-                <th class="text-right">Administrative Actions</th>
-              </tr>
-            </thead>
-            <tbody id="flaggedFilesTableBody">
-              <!-- Dynamically populated rows -->
-            </tbody>
-          </table>
-        </div>
+    <!-- Empty State -->
+    <div class="empty-state-card" id="emptyStateContainer" style="display: none;">
+      <div class="empty-icon-wrap">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
       </div>
+      <h4>No Files Seeded in Swarm</h4>
+      <p id="emptyStateMessage">No documents are currently shared in this peer mesh. Click below to seed a file or note!</p>
+      <button class="btn btn-primary" id="btnEmptyUpload">Share / Seed a File</button>
+    </div>
 
-      <!-- Subview B: Malicious Actor Management -->
-      <div class="admin-subpanel" id="adminActorsPanel" style="display: none;">
-        <div class="panel-header-toolbar">
-          <div class="toolbar-title">
-            <h4>Campus Node Accounts &amp; Reputation Roster</h4>
-            <p>Track student nodes, trust scores, reported offenses, and revoke peer hosting privileges for repeat or malicious violators.</p>
-          </div>
-          <div class="toolbar-actions">
-            <button class="btn btn-danger btn-sm" id="btnOpenBlacklistModal">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-              <span>Blacklist Node ID</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="admin-table-wrapper">
-          <table class="admin-table" id="actorsTable">
-            <thead>
-              <tr>
-                <th>Student / Node Identity</th>
-                <th>Campus Affiliation</th>
-                <th>Integrity Trust Score</th>
-                <th>Upload Count</th>
-                <th>Offense History</th>
-                <th>Access Status</th>
-                <th class="text-right">Governance Controls</th>
-              </tr>
-            </thead>
-            <tbody id="actorsTableBody">
-              <!-- Dynamically populated actor rows -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Subview C: Audit Ledger -->
-      <div class="admin-subpanel" id="adminAuditPanel" style="display: none;">
-        <div class="panel-header-toolbar">
-          <div class="toolbar-title">
-            <h4>Cryptographic Institutional Audit Trail</h4>
-            <p>Permanent log of moderation interventions, quarantine executions, and account bans logged with node hashes.</p>
-          </div>
-          <div class="toolbar-actions">
-            <button class="btn btn-secondary btn-sm" id="btnExportAuditLog">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span>Export Audit JSON</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="audit-timeline" id="auditTimelineContainer">
-          <!-- Dynamically populated timeline entries -->
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- ============================================== -->
@@ -468,38 +228,26 @@
     <div class="modal-window modal-wide" role="dialog" aria-modal="true" aria-labelledby="readerModalTitle">
       <div class="modal-header">
         <div class="reader-header-meta">
-          <div class="reader-badge-row">
+          <div class="badge-stack" style="margin-bottom: 0.35rem;">
             <span class="course-badge" id="readerCourseBadge">CS-301</span>
             <span class="integrity-verified-tag" id="readerIntegrityTag">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-              SHA-256 Honor Verified
+              SHA-256 Verified
             </span>
-            <span class="seeder-status-pill" id="readerSeederBadge">34 Seeders</span>
+            <span class="seeder-count-row" id="readerSeederBadge" style="font-size: 0.72rem;">1 Seeder</span>
           </div>
-          <h2 class="modal-title" id="readerModalTitle">Dynamic Programming: State Space Reduction &amp; Matrix Memoization</h2>
-          <div class="reader-submeta" id="readerSubmeta">
-            Prof. Elena Rostova &bull; Fall 2026 &bull; Posted by Alex Chen (CS '26)
+          <h2 class="modal-title" id="readerModalTitle">Document Title</h2>
+          <div class="note-meta-line" id="readerSubmeta" style="margin-bottom: 0;">
+            Course &bull; Instructor &bull; Seeder Node
           </div>
         </div>
-        <div class="modal-header-actions">
-          <button class="btn btn-secondary btn-sm" id="btnReaderFlag" title="Report for academic integrity concern">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-            <span>Report File</span>
-          </button>
-          <button class="modal-close-btn" id="btnCloseReader" aria-label="Close reader">&times;</button>
-        </div>
-      </div>
-
-      <!-- Watermark Bar -->
-      <div class="honor-code-watermark-bar">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <span><strong>ACADEMIC HONESTY NOTICE:</strong> This note is hosted via P2P campus network for personal study and reference only. Sharing exam questions, solutions to active problem sets, or plagiarized works is strictly prohibited.</span>
+        <button class="modal-close-btn" id="btnCloseReader" aria-label="Close reader">&times;</button>
       </div>
 
       <!-- Reader Body -->
       <div class="modal-body reader-body-content">
         <div class="reader-markdown-container" id="readerContentArea">
-          <!-- Formatted content with code, math, callouts inserted dynamically -->
+          <!-- Formatted content inserted dynamically -->
         </div>
 
         <div class="reader-sidebar-info">
@@ -511,54 +259,46 @@
             </div>
             <div class="meta-row">
               <span class="m-label">Active Seeders:</span>
-              <span class="m-val text-emerald font-semibold" id="readerSeedersCount">34 nodes</span>
-            </div>
-            <div class="meta-row">
-              <span class="m-label">Local Swarm Speed:</span>
-              <span class="m-val">24.6 MB/s</span>
+              <span class="m-val text-emerald font-semibold" id="readerSeedersCount">1 node</span>
             </div>
             <div class="meta-row">
               <span class="m-label">File Size:</span>
-              <span class="m-val" id="readerFileSize">2.4 MB (32 Pages)</span>
+              <span class="m-val" id="readerFileSize">2.4 MB</span>
             </div>
             <div class="meta-row">
-              <span class="m-label">Faculty Audit:</span>
-              <span class="m-val text-emerald" id="readerFacultyAudit">Passed Clean</span>
+              <span class="m-label">File Type:</span>
+              <span class="m-val mono" id="readerFileType">PDF</span>
+            </div>
+            <div class="meta-row">
+              <span class="m-label">Downloads:</span>
+              <span class="m-val" id="readerDownloadsCount">0</span>
             </div>
           </div>
 
           <div class="meta-card">
             <h5>Document Topics &amp; Tags</h5>
-            <div class="tag-cloud" id="readerTagCloud">
-              <!-- Tags rendered dynamically -->
-            </div>
+            <div class="note-tags-row" id="readerTagCloud" style="margin-bottom: 0;"></div>
           </div>
 
           <div class="meta-card">
-            <h5>Student Peer Feedback</h5>
-            <div class="vote-control-wrap">
-              <button class="vote-btn" id="btnUpvoteNote">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-                <span id="readerUpvoteCount">142</span>
-              </button>
-              <button class="vote-btn" id="btnBookmarkNote">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-                <span>Save to Binder</span>
-              </button>
-            </div>
+            <h5>Local Node Management</h5>
+            <button class="btn btn-secondary btn-sm" id="btnDeleteNote" style="width: 100%; color: var(--rose); border-color: var(--rose);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              <span>Un-seed &amp; Delete File</span>
+            </button>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
         <div class="footer-left">
-          <span class="text-muted text-sm" id="readerNodeFooter">Encrypted campus LAN peer transfer &bull; Zero bandwidth external cost</span>
+          <span class="text-muted text-sm" id="readerNodeFooter">Direct socket peer transfer &bull; Verified integrity</span>
         </div>
         <div class="footer-right">
           <button class="btn btn-secondary" id="btnReaderCloseBottom">Close</button>
           <button class="btn btn-primary" id="btnReaderDownload">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span>Initiate P2P Swarm Download</span>
+            <span>Download via P2P</span>
           </button>
         </div>
       </div>
@@ -572,8 +312,8 @@
     <div class="modal-window modal-medium" role="dialog" aria-modal="true" aria-labelledby="uploadModalTitle">
       <div class="modal-header">
         <div>
-          <h3 class="modal-title" id="uploadModalTitle">Host &amp; Seed Course Notes</h3>
-          <p class="modal-subtext">Publish lecture materials directly to the campus peer-to-peer network cluster.</p>
+          <h3 class="modal-title" id="uploadModalTitle">Seed File to P2P Swarm</h3>
+          <p class="modal-subtext">Publish a file or note directly to local campus peer nodes.</p>
         </div>
         <button class="modal-close-btn" id="btnCloseUpload" aria-label="Close upload">&times;</button>
       </div>
@@ -581,21 +321,21 @@
       <form id="uploadNoteForm" class="modal-body form-grid">
         <!-- File Dropzone -->
         <div class="form-group full-width">
-          <label class="form-label">Note Document (.PDF, .MD, .IPYNB, .TXT)</label>
+          <label class="form-label">Select File to Seed (Any Document / Text / PDF / Code)</label>
           <div class="file-dropzone" id="fileDropzone">
-            <input type="file" id="noteFileInput" class="file-input-hidden" accept=".pdf,.md,.ipynb,.docx,.txt,.png,.jpg">
+            <input type="file" id="noteFileInput" class="file-input-hidden">
             <div class="dropzone-content" id="dropzoneContentDefault">
-              <svg class="dropzone-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <svg class="dropzone-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               <div class="dropzone-text">
-                <strong>Click to browse</strong> or drag &amp; drop study note file here
+                <strong>Click to browse</strong> or drag &amp; drop file here
               </div>
-              <span class="dropzone-hint">Supports PDF, Markdown, Jupyter Notebooks &bull; Max 50MB</span>
+              <span class="dropzone-hint">Supports PDF, Markdown, Python, Text, and any campus file</span>
             </div>
             <div class="dropzone-content" id="dropzoneContentSelected" style="display: none;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b8bb26" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
               <span class="file-selected-name" id="selectedFileName">filename.pdf</span>
               <span class="file-selected-size" id="selectedFileSize">3.2 MB</span>
-              <button type="button" class="btn-text-danger btn-sm" id="btnRemoveSelectedFile">Remove file</button>
+              <button type="button" class="btn-text-danger btn-sm" id="btnRemoveSelectedFile">Remove</button>
             </div>
           </div>
         </div>
@@ -603,89 +343,55 @@
         <!-- Note Title -->
         <div class="form-group full-width">
           <label for="inputNoteTitle" class="form-label">Document Title *</label>
-          <input type="text" id="inputNoteTitle" class="form-control" placeholder="e.g., Comprehensive Final Exam Synthesis &amp; Formula Guide" required>
+          <input type="text" id="inputNoteTitle" class="form-control" placeholder="e.g. Distributed Systems &amp; Socket Programming Notes" required>
         </div>
 
-        <!-- Course & Professor -->
+        <!-- Course & Professor / Author -->
         <div class="form-group">
-          <label for="inputCourse" class="form-label">Course Code &amp; Title *</label>
-          <select id="inputCourse" class="form-control" required>
-            <option value="" disabled selected>Select course...</option>
-            <option value="CS-301">CS-301: Algorithms &amp; Data Structures</option>
-            <option value="BIO-210">BIO-210: Molecular &amp; Cellular Biology</option>
-            <option value="MATH-240">MATH-240: Linear Algebra &amp; Multivariable</option>
-            <option value="ECON-101">ECON-101: Principles of Macroeconomics</option>
-            <option value="EE-220">EE-220: Digital Logic &amp; Microprocessors</option>
-            <option value="PHYS-150">PHYS-150: Quantum Physics Foundations</option>
-            <option value="CHEM-202">CHEM-202: Organic Chemistry Reactions</option>
-          </select>
+          <label for="inputCourse" class="form-label">Course Code / Subject *</label>
+          <input type="text" id="inputCourse" class="form-control" placeholder="e.g. CS-301, MATH-240, General" required>
         </div>
 
         <div class="form-group">
-          <label for="inputProfessor" class="form-label">Professor / Lecturer *</label>
-          <select id="inputProfessor" class="form-control" required>
-            <option value="" disabled selected>Select professor...</option>
-            <option value="Prof. Elena Rostova">Prof. Elena Rostova</option>
-            <option value="Dr. Aris Thorne">Dr. Aris Thorne</option>
-            <option value="Dr. Marcus Vance">Dr. Marcus Vance</option>
-            <option value="Dr. Maya Lin">Dr. Maya Lin</option>
-            <option value="Prof. Sarah Chen">Prof. Sarah Chen</option>
-            <option value="Dr. Jonathan Hayes">Dr. Jonathan Hayes</option>
-          </select>
+          <label for="inputProfessor" class="form-label">Instructor / Author</label>
+          <input type="text" id="inputProfessor" class="form-control" placeholder="e.g. Prof. Smith or Student Node">
         </div>
 
         <!-- Semester & Material Category -->
         <div class="form-group">
-          <label for="inputSemester" class="form-label">Semester *</label>
-          <select id="inputSemester" class="form-control" required>
-            <option value="Fall 2026" selected>Fall 2026 (Current)</option>
-            <option value="Spring 2026">Spring 2026</option>
-            <option value="Fall 2025">Fall 2025</option>
-            <option value="Spring 2025">Spring 2025</option>
-            <option value="Summer 2026">Summer 2026</option>
-          </select>
+          <label for="inputSemester" class="form-label">Semester / Term</label>
+          <input type="text" id="inputSemester" class="form-control" placeholder="e.g. Fall 2026">
         </div>
 
         <div class="form-group">
-          <label for="inputCategory" class="form-label">Material Category *</label>
-          <select id="inputCategory" class="form-control" required>
-            <option value="Exam Study Guides">Exam Study Guides</option>
+          <label for="inputCategory" class="form-label">Category</label>
+          <select id="inputCategory" class="form-control">
             <option value="Lecture Summaries">Lecture Summaries</option>
+            <option value="Exam Study Guides">Exam Study Guides</option>
             <option value="Lab Protocols &amp; Data">Lab Protocols &amp; Data</option>
             <option value="Formula Cheatsheets">Formula Cheatsheets</option>
-            <option value="Annotated Readings">Annotated Readings</option>
+            <option value="Code &amp; Scripts">Code &amp; Scripts</option>
+            <option value="General Notes">General Notes</option>
           </select>
         </div>
 
         <!-- Topic Tags -->
         <div class="form-group full-width">
           <label for="inputTopicTags" class="form-label">Topic Tags (comma-separated)</label>
-          <input type="text" id="inputTopicTags" class="form-control" placeholder="e.g. Graph Algorithms, Dynamic Programming, Memoization">
+          <input type="text" id="inputTopicTags" class="form-control" placeholder="e.g. TCP, Sockets, P2P, Distributed">
         </div>
 
-        <!-- Note Summary / Content Preview -->
+        <!-- Description -->
         <div class="form-group full-width">
-          <label for="inputNoteDescription" class="form-label">Summary / Abstract of Content *</label>
-          <textarea id="inputNoteDescription" class="form-control" rows="3" placeholder="Brief outline of covered chapters, theorems, and key insights..." required></textarea>
-        </div>
-
-        <!-- Academic Honesty Pledge Checkbox -->
-        <div class="form-group full-width honor-pledge-box">
-          <label class="checkbox-container">
-            <input type="checkbox" id="checkHonorPledge" required>
-            <span class="custom-checkbox"></span>
-            <span class="checkbox-label">
-              <strong>University Academic Integrity Declaration:</strong>
-              I swear under the East Coast Institute Honor Code that this uploaded material contains <em>no live or unauthorized exam content, no solutions to active un-graded problem sets, and no copyrighted textbook scans</em>. All work adheres to the university peer educational fair-use charter.
-            </span>
-          </label>
+          <label for="inputNoteDescription" class="form-label">Description / Summary (Markdown Supported)</label>
+          <textarea id="inputNoteDescription" class="form-control" rows="3" placeholder="Brief summary of what this document covers..."></textarea>
         </div>
 
         <div class="modal-footer full-width">
           <button type="button" class="btn btn-secondary" id="btnCancelUpload">Cancel</button>
           <button type="submit" class="btn btn-primary" id="btnSubmitUpload">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-            <span>Sign &amp; Host to Swarm</span>
+            <span>Seed to P2P Swarm</span>
           </button>
         </div>
       </form>
@@ -693,22 +399,22 @@
   </div>
 
   <!-- ============================================== -->
-  <!-- MODAL 3: P2P DOWNLOAD & SWARM SIMULATOR        -->
+  <!-- MODAL 3: P2P DOWNLOAD & TRANSFER SIMULATOR    -->
   <!-- ============================================== -->
   <div class="modal-backdrop" id="modalP2PTransfer" aria-hidden="true">
     <div class="modal-window modal-sm" role="dialog" aria-modal="true" aria-labelledby="transferModalTitle">
       <div class="modal-header">
         <div>
           <h3 class="modal-title" id="transferModalTitle">P2P Swarm Transfer</h3>
-          <p class="modal-subtext">Connecting to local university campus peer seeders via TCP sockets...</p>
+          <p class="modal-subtext">Transferring chunks directly from swarm peers via TCP sockets...</p>
         </div>
         <button class="modal-close-btn" id="btnCloseTransfer" aria-label="Close transfer">&times;</button>
       </div>
 
       <div class="modal-body p2p-transfer-body">
         <div class="p2p-file-summary">
-          <span class="p2p-file-title" id="p2pDocTitle">CS301_Final_Review.pdf</span>
-          <span class="p2p-hash-stamp" id="p2pDocHash">SHA256: 7fa3...90e1</span>
+          <span class="p2p-file-title" id="p2pDocTitle">file.pdf</span>
+          <span class="p2p-hash-stamp" id="p2pDocHash">SHA-256: 7fa3...90e1</span>
         </div>
 
         <!-- Progress Animation -->
@@ -718,19 +424,17 @@
           </div>
           <div class="meter-stats-row">
             <span id="p2pProgressPercent">0%</span>
-            <span id="p2pTransferSpeed">Connecting to LAN swarm...</span>
-            <span id="p2pPeersConnected">0 peers</span>
+            <span id="p2pTransferSpeed">Connecting to LAN peers...</span>
+            <span id="p2pPeersConnected">1 peer</span>
           </div>
         </div>
 
         <!-- Swarm Topology Nodes Display -->
-        <div class="swarm-peers-visual" id="swarmPeersVisual">
-          <!-- Dynamic swarm dots generated during transfer -->
-        </div>
+        <div class="swarm-peers-visual" id="swarmPeersVisual"></div>
 
         <div class="integrity-check-step" id="integrityCheckStep">
           <div class="check-icon-spin" id="checkSpinner"></div>
-          <span id="integrityCheckText">Verifying cryptographic hash with university campus ledger...</span>
+          <span id="integrityCheckText">Verifying cryptographic SHA-256 integrity hash...</span>
         </div>
       </div>
 
@@ -738,100 +442,9 @@
         <button class="btn btn-secondary" id="btnCancelTransfer">Close</button>
         <button class="btn btn-success" id="btnCompleteTransfer" style="display: none;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Save File to Device</span>
+          <span>Save File to Disk</span>
         </button>
       </div>
-    </div>
-  </div>
-
-  <!-- ============================================== -->
-  <!-- MODAL 4: REPORT / FLAG MATERIAL MODAL          -->
-  <!-- ============================================== -->
-  <div class="modal-backdrop" id="modalFlag" aria-hidden="true">
-    <div class="modal-window modal-medium" role="dialog" aria-modal="true" aria-labelledby="flagModalTitle">
-      <div class="modal-header">
-        <div class="flag-header-wrap">
-          <div class="flag-icon-circle">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-          </div>
-          <div>
-            <h3 class="modal-title" id="flagModalTitle">Report Academic Integrity Violation</h3>
-            <p class="modal-subtext">Submit file for urgent review by the University Academic Integrity Board.</p>
-          </div>
-        </div>
-        <button class="modal-close-btn" id="btnCloseFlag" aria-label="Close flag modal">&times;</button>
-      </div>
-
-      <form id="flagReportForm" class="modal-body form-grid">
-        <div class="form-group full-width">
-          <label class="form-label">Flagged Document</label>
-          <input type="text" id="flaggedDocName" class="form-control" readonly>
-        </div>
-
-        <div class="form-group full-width">
-          <label for="flagReasonCategory" class="form-label">Primary Violation Category *</label>
-          <select id="flagReasonCategory" class="form-control" required>
-            <option value="" disabled selected>Select category...</option>
-            <option value="Unauthorized Exam Leak">Unauthorized / Stolen Exam or Quiz Questions</option>
-            <option value="Unsanctioned Problem Set Solutions">Direct Solutions to Active Graded Problem Sets</option>
-            <option value="Commercial Copyright Infringement">Commercial Textbook Scans / Copyrighted Publisher Content</option>
-            <option value="Malicious Payload / Trojan">Suspected Malicious Code / Phishing Link / Executable</option>
-            <option value="Harassment or Plagiarism">Student Harassment, Impersonation or False Attribution</option>
-          </select>
-        </div>
-
-        <div class="form-group full-width">
-          <label for="flagExplanation" class="form-label">Evidence &amp; Explanation *</label>
-          <textarea id="flagExplanation" class="form-control" rows="3" placeholder="Provide specific course syllabus references, question numbers, or technical findings..." required></textarea>
-        </div>
-
-        <div class="modal-footer full-width">
-          <button type="button" class="btn btn-secondary" id="btnCancelFlag">Cancel</button>
-          <button type="submit" class="btn btn-danger" id="btnSubmitFlag">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
-            <span>Submit Urgent Report</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ============================================== -->
-  <!-- MODAL 5: BLACKLIST ACTOR MODAL                 -->
-  <!-- ============================================== -->
-  <div class="modal-backdrop" id="modalBlacklist" aria-hidden="true">
-    <div class="modal-window modal-sm" role="dialog" aria-modal="true" aria-labelledby="blacklistTitle">
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title" id="blacklistTitle">Blacklist Campus Node</h3>
-          <p class="modal-subtext">Sever peer hosting &amp; seeding permissions across all campus swarms.</p>
-        </div>
-        <button class="modal-close-btn" id="btnCloseBlacklist">&times;</button>
-      </div>
-
-      <form id="blacklistForm" class="modal-body form-grid">
-        <div class="form-group full-width">
-          <label for="blacklistNodeId" class="form-label">Node Identifier or Student ID *</label>
-          <input type="text" id="blacklistNodeId" class="form-control" placeholder="e.g. Node #9948 or STU-88219" required>
-        </div>
-
-        <div class="form-group full-width">
-          <label for="blacklistReason" class="form-label">Institutional Violation Justification *</label>
-          <select id="blacklistReason" class="form-control" required>
-            <option value="Repeated Exam Leaks">Repeated Exam Leaks (Policy &sect; 4.2)</option>
-            <option value="Malicious Binary Distribution">Malicious Binary / Keylogger Distribution</option>
-            <option value="Mass Automated Scraping / DoS">Automated Scraping &amp; Swarm Flooding</option>
-            <option value="Provost Academic Suspension">Provost Academic Disciplinary Suspension</option>
-          </select>
-        </div>
-
-        <div class="modal-footer full-width">
-          <button type="button" class="btn btn-secondary" id="btnCancelBlacklist">Cancel</button>
-          <button type="submit" class="btn btn-danger" id="btnConfirmBlacklist">
-            <span>Execute Swarm Blacklist</span>
-          </button>
-        </div>
-      </form>
     </div>
   </div>
 
