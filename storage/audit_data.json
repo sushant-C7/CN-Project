@@ -1,0 +1,35 @@
+[
+  {
+    "id": "audit-1",
+    "actionType": "quarantine",
+    "title": "Quarantine Order Executed: Biochem_Molecular_AutoSolver_Crack.py.zip",
+    "admin": "Automated Campus Defender v4.1",
+    "target": "Node #1042",
+    "reason": "Malicious Trojan payload detected via heuristic sandbox analysis.",
+    "policyRef": "Univ. IT Sec Policy § 9.1",
+    "timestamp": "2026-10-20 16:35:12",
+    "hash": "a12bc90088192031fa198273619200aa9182a01490218"
+  },
+  {
+    "id": "audit-2",
+    "actionType": "ban",
+    "title": "Node Host Disconnected & Blacklisted: Node #1042",
+    "admin": "Dr. Marcus Vance (Academic Integrity Officer)",
+    "target": "Node #1042",
+    "reason": "Severe campus network security threat and payload dissemination.",
+    "policyRef": "Honor Code § 4.2 / IT Bylaw § 12",
+    "timestamp": "2026-10-20 16:40:02",
+    "hash": "0x992fa18e001c"
+  },
+  {
+    "id": "audit-3",
+    "actionType": "flag",
+    "title": "Urgent Violation Report Logged: CS301_Midterm_Leaked_Live_Questions_Fall26.pdf",
+    "admin": "Prof. Elena Rostova (Faculty Report)",
+    "target": "Node #9948",
+    "reason": "Suspected stolen exam questions scheduled for midterm session.",
+    "policyRef": "Academic Honesty Charter Art. II",
+    "timestamp": "2026-10-21 09:14:45",
+    "hash": "e812a09148bc1049281a90c0129a00812736192a018bc"
+  }
+]
